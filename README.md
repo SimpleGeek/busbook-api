@@ -7,4 +7,4 @@ The schema and default test data are stored in schema.sql and data.sql respectiv
 To start postgres using podman, use this command: 
 podman run --name some-postgres -p 5432:5432 -e POSTGRES_PASSWORD=buspw -d postgres
 
-Note that the default user is 'postgres'.  The command above starts the postgres server with the default schema of 'postgres' and a password of 'buspw'.
+Note that the default user is 'postgres'.  The command above starts the postgres server with the default schema of 'postgres' and a password of 'buspw' of port 5432.

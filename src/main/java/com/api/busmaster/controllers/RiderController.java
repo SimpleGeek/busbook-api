@@ -1,5 +1,7 @@
 package com.api.busmaster.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +19,8 @@ public class RiderController {
 		return riderService.getRider();
 	}
 	
-	@GetMapping("/hello")
-	public String getHello() {
-		return "Hello!";
+	@GetMapping("/api/getriders")
+	public List<Rider> getRiders() {
+		return riderService.getRiders();
 	}
 }

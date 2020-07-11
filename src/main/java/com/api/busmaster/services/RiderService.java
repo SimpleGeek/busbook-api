@@ -1,5 +1,7 @@
 package com.api.busmaster.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +15,9 @@ public class RiderService {
 	
 	public Rider getRider() {
 		return riderDao.getRider();
+	}
+	
+	public List<Rider> getRiders() {
+		return riderDao.getRiders();
 	}
 }
