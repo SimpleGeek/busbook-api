@@ -37,4 +37,8 @@ public class RiderDao {
 		}
 		return riders;
 	}
+	
+	public List<Rider> getRidersForStop(int stopId) {
+		return new ArrayList<Rider>();
+	}
 }
