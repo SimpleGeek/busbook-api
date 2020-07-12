@@ -13,10 +13,6 @@ public class RiderService {
 	@Autowired
 	private RiderDao riderDao;
 	
-	public Rider getRider() {
-		return riderDao.getRider();
-	}
-	
 	public List<Rider> getRiders() {
 		return riderDao.getRiders();
 	}

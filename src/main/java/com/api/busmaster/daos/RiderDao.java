@@ -15,16 +15,13 @@ public class RiderDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	public Rider getRider() {
-		return new Rider(1, "Joe", "Tester", 1);
-	}
-	
 	public List<Rider> getRiders() {
 		List<Rider> riders = new ArrayList<Rider>();
 		String getRiderSql =
 				"select rider_id,\n" +
 				"       fname,\n" +
 				"       lname,\n" +
+				"		\n" +
 				"       stop_id\n" +
 				"from public.riders";
 		SqlRowSet rs = jdbcTemplate.queryForRowSet(getRiderSql);

@@ -5,17 +5,21 @@ public class Rider {
 	private int riderId;
 	private String fname;
 	private String lname;
+	private int age; // Age in whole years old
+	private String birthday;
 	private int stopId;
 	
 	// Public constructors
-	public Rider(int riderId, String fname, String lname, int stopId) {
+	public Rider() {}
+	
+	public Rider(int riderId, String fname, String lname, int age, String birthday, int stopId) {
 		this.riderId = riderId;
 		this.fname = fname;
 		this.lname = lname;
+		this.age = age;
+		this.birthday = birthday;
 		this.stopId = stopId;
 	}
-	
-	public Rider() {}
 
 	// Getters/Setters
 	public int getRiderId() {
@@ -40,6 +44,22 @@ public class Rider {
 
 	public void setLname(String lname) {
 		this.lname = lname;
+	}
+	
+	public int getAge() {
+		return age;
+	}
+	
+	public void setAge(int age) {
+		this.age = age;
+	}
+	
+	public String getBirthday() {
+		return birthday;
+	}
+	
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
 	}
 
 	public int getStopId() {

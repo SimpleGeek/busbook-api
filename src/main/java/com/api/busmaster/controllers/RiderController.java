@@ -14,11 +14,6 @@ public class RiderController {
 	@Autowired
 	private RiderService riderService;
 	
-	@GetMapping("/api/getrider")
-	public Rider getRider() {
-		return riderService.getRider();
-	}
-	
 	@GetMapping("/api/getriders")
 	public List<Rider> getRiders() {
 		return riderService.getRiders();
