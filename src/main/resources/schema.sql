@@ -1,10 +1,10 @@
-drop table if exists routes;
+drop table if exists routes cascade;
 create table routes(
 	route_id serial primary key,
 	bus_num integer
 );
 
-drop table if exists stops;
+drop table if exists stops cascade;
 create table stops(
 	stop_id serial primary key,
 	seq_num integer,
@@ -18,7 +18,7 @@ create table stops(
 	route_id integer references routes(route_id)
 );
 
-drop table if exists riders;
+drop table if exists riders cascade;
 create table riders(
 	rider_id serial primary key,
 	fname varchar (200),

@@ -21,13 +21,19 @@ public class RiderDao {
 				"select rider_id,\n" +
 				"       fname,\n" +
 				"       lname,\n" +
-				"		\n" +
+				"       age(birthday) as age_str,\n" +
+				"		to_char(birthday, 'Mon dd, yyyy') as birthday,\n" +
 				"       stop_id\n" +
-				"from public.riders";
+				"from riders";
 		SqlRowSet rs = jdbcTemplate.queryForRowSet(getRiderSql);
 		while(rs.next()) {
+			// The postgres AGE function returns the age in a string formatted like so:
+			// XX years XX mons XX days
+			// In this case, we only care about the years, so we're simply pulling out
+			// the first two characters of that string.
+			int age = Integer.parseInt(rs.getString("age_str").substring(0, 2).trim());
 			riders.add(new Rider(rs.getInt("rider_id"), rs.getString("fname"),
-								 rs.getString("lname"), rs.getInt("stop_id")));
+								 rs.getString("lname"), age, rs.getString("birthday"), rs.getInt("stop_id")));
 		}
 		return riders;
 	}
