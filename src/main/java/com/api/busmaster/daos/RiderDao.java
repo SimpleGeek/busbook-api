@@ -45,7 +45,7 @@ public class RiderDao {
 				" where stop_id = ?";
 		
 		List<Rider> stopRiders = new ArrayList<Rider>();
-		SqlRowSet rs = jdbcTemplate.queryForRowSet(getRidersForStopSql,stopId);
+		SqlRowSet rs = jdbcTemplate.queryForRowSet(getRidersForStopSql, stopId);
 		while (rs.next()) {
 			stopRiders.add(new Rider(rs.getInt("rider_id"), rs.getString("fname"), rs.getString("lname"), 
 									 getYearsFromAgeStr(rs.getString("age_str")), rs.getString("birthday"), rs.getInt("stop_id")));

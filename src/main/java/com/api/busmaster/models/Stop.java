@@ -34,11 +34,11 @@ public class Stop {
 	}
 
 	// Getters/Setters
-	public int getStopid() {
+	public int getStopId() {
 		return stopid;
 	}
 
-	public void setStopid(int stopid) {
+	public void setStopId(int stopid) {
 		this.stopid = stopid;
 	}
 
