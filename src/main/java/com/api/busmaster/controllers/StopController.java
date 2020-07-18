@@ -15,7 +15,6 @@ public class StopController {
 	
 	@GetMapping("/api/nextstop")
 	public Stop getNextStop(@RequestParam("prevStopSeqNum")int prevStopSeqNum, @RequestParam("routeId")int routeId) {
-		System.out.println("Request params: " + prevStopSeqNum + " " + routeId);
 		return stopService.getNextStop(prevStopSeqNum, routeId);
 	}
 }

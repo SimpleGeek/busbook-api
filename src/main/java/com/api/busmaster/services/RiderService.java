@@ -18,8 +18,6 @@ public class RiderService {
 	}
 	
 	public List<Rider> getRidersForStop(int stopId) {
-		System.out.println("Stop id: " + stopId);
-		System.out.println("Rider Dao: " + riderDao);
 		return riderDao.getRidersForStop(stopId);
 	}
 }

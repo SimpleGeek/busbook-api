@@ -11,12 +11,13 @@ public class StopService {
 	@Autowired
 	private StopDao stopDao;
 	
+	@Autowired
+	private RiderService riderService;
+	
 	public Stop getNextStop(int prevStopSeqNum, int routeId) {
 		Stop nextStop = stopDao.getNextStop(prevStopSeqNum, routeId);
-		System.out.println("Stop id: " + nextStop.getStopId());
 		
 		// Retrieve list of riders for this stop
-		RiderService riderService = new RiderService();
 		nextStop.setRiders(riderService.getRidersForStop(nextStop.getStopId()));
 		
 		return nextStop;

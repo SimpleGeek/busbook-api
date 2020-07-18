@@ -39,7 +39,6 @@ public class StopDao {
 		SqlRowSet rs = jdbcTemplate.queryForRowSet(getNextStopSql, (prevStopSeqNum + 1), routeId);
 		Stop nextStop = new Stop();
 		while (rs.next()) {
-			System.out.println("Got a row for next stop!");
 			nextStop.setStopId(rs.getInt("stop_id"));
 			nextStop.setSeqNum(rs.getInt("seq_num"));
 			nextStop.setStreetAddr(rs.getString("street_addr"));
