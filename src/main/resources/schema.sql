@@ -26,3 +26,22 @@ create table riders(
 	birthday date,
 	stop_id integer references stops(stop_id)
 );
+
+drop table if exists users cascade;
+create table users(
+	user_id serial primary key,
+	fname varchar (200),
+	lname varchar (200),
+	email varchar (350),
+	phone varchar (12),
+	username varchar (250),
+	password varchar (250),
+	salt varchar (250),
+	route_id integer references routes(route_id)
+);
+
+drop table if exists attendance_records(
+	attendance_rec_id serial primary key,
+	attendance_dt date,
+	rider_id integer references riders(rider_id)
+);
