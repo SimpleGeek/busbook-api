@@ -1,5 +1,7 @@
 package com.api.busmaster.daos;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -15,7 +17,10 @@ public class AttendanceRecordDao {
 	 * 
 	 * @param riderId
 	 */
-	public void insertAttendanceRecord(int riderId) {
-		
+	public void insertAttendanceRecords(List<Integer> riderIds) {
+		String insertAttendanceRecordSql =
+				"insert into attendance_records (attendance_dt, rider_id)\n" +
+				"values (current_date, ?)";
+		jdbcTemplate.batchUpdate(insertAttendanceRecordSql, riderIds);
 	}
 }
