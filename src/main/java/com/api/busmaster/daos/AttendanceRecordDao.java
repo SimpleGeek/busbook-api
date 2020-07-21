@@ -1,10 +1,15 @@
 package com.api.busmaster.daos;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.api.busmaster.models.Rider;
 
 @Repository
 public class AttendanceRecordDao {
@@ -17,10 +22,26 @@ public class AttendanceRecordDao {
 	 * 
 	 * @param riderId
 	 */
-	public void insertAttendanceRecords(List<Integer> riderIds) {
+	public void insertAttendanceRecords(List<Rider> riders) {
 		String insertAttendanceRecordSql =
 				"insert into attendance_records (attendance_dt, rider_id)\n" +
 				"values (current_date, ?)";
-		jdbcTemplate.batchUpdate(insertAttendanceRecordSql, riderIds);
+		jdbcTemplate.batchUpdate(insertAttendanceRecordSql, new BatchPreparedStatementSetter() {
+			@Override
+			public void setValues(PreparedStatement ps, int i) {
+				Rider rider = riders.get(i);
+				
+				try {
+					ps.setInt(1, rider.getRiderId());
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public int getBatchSize() {
+				return riders.size();
+			}
+		});
 	}
 }
