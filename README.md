@@ -17,3 +17,6 @@ spring.datasource.initialization-mode=always
 This tells spring boot to re-initialize the database schema and data with what is in the schema.sql and data.sql files upon starting the app.  If you wish to maintain the same schema, you will need to remove this line after you have performed your initial data object creation and inserts.
 
 More documentation to come on how to create a production database environment...
+
+### Local project setup
+You will need eclipse EE to edit this project.  Once you have cloned the project to your local workspace, you will need to import it as a Maven project.  When you first import the project, you may encounter some Maven POM errors.  If so, right-click the project, and run Maven -> Update Project.  Once this has completed, the project should be recognized, and display as expected without errors.
