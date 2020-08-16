@@ -61,6 +61,7 @@ public class RiderDao {
 	 * @param ageStr
 	 * @return
 	 */
+	// TODO: Move this to a more generic util class
 	private int getYearsFromAgeStr(String ageStr) {
 		// The postgres AGE function returns the age in a string formatted like so:
 		// XX years XX mons XX days

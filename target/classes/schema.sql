@@ -40,7 +40,8 @@ create table users(
 	route_id integer references routes(route_id)
 );
 
-drop table if exists attendance_records(
+drop table if exists attendance_records;
+create table attendance_records(
 	attendance_rec_id serial primary key,
 	attendance_dt date,
 	rider_id integer references riders(rider_id)
