@@ -9,6 +9,8 @@ import com.api.busmaster.models.User;
 public class UserController {
 	@GetMapping("/api/users/authenticate")
 	public User authenticate() {
-		return new User(true);
+		User u = new User(true);
+		u.addRoute(1);
+		return u;
 	}
 }
