@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Stop {
 	// Private attributes
-	private int stopid;
+	private int stopId;
 	private int seqNum;
 	private String streetAddr;
 	private String city;
@@ -19,9 +19,9 @@ public class Stop {
 	// Public constructors
 	public Stop() {}
 	
-	public Stop(int stopid, int seqNum, String streetAddr, String city, String stateAbbr, String zip, String apartment,
+	public Stop(int stopId, int seqNum, String streetAddr, String city, String stateAbbr, String zip, String apartment,
 			String building, String door, int routeId) {
-		this.stopid = stopid;
+		this.stopId = stopId;
 		this.seqNum = seqNum;
 		this.streetAddr = streetAddr;
 		this.city = city;
@@ -35,11 +35,11 @@ public class Stop {
 
 	// Getters/Setters
 	public int getStopId() {
-		return stopid;
+		return stopId;
 	}
 
 	public void setStopId(int stopid) {
-		this.stopid = stopid;
+		this.stopId = stopid;
 	}
 
 	public int getSeqNum() {
