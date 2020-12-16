@@ -9,8 +9,6 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.api.busmaster.models.Rider;
-
 @Repository
 public class AttendanceRecordDao {
 	@Autowired
@@ -22,17 +20,17 @@ public class AttendanceRecordDao {
 	 * 
 	 * @param riderId
 	 */
-	public void insertAttendanceRecords(List<Rider> riders) {
+	public void insertAttendanceRecords(List<Integer> riderIds) {
 		String insertAttendanceRecordSql =
 				"insert into attendance_records (attendance_dt, rider_id)\n" +
 				"values (current_date, ?)";
 		jdbcTemplate.batchUpdate(insertAttendanceRecordSql, new BatchPreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps, int i) {
-				Rider rider = riders.get(i);
+				Integer id = riderIds.get(i);
 				
 				try {
-					ps.setInt(1, rider.getRiderId());
+					ps.setInt(1, id);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -40,7 +38,7 @@ public class AttendanceRecordDao {
 			
 			@Override
 			public int getBatchSize() {
-				return riders.size();
+				return riderIds.size();
 			}
 		});
 	}
