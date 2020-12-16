@@ -38,6 +38,7 @@ public class StopDao {
 		
 		SqlRowSet rs = jdbcTemplate.queryForRowSet(getNextStopSql, (prevStopSeqNum + 1), routeId);
 		Stop nextStop = new Stop();
+		int lastSeqNum = getLastStopSeqInRoute(routeId);
 		while (rs.next()) {
 			nextStop.setStopId(rs.getInt("stop_id"));
 			nextStop.setSeqNum(rs.getInt("seq_num"));
@@ -49,7 +50,19 @@ public class StopDao {
 			nextStop.setBuilding(rs.getString("building"));
 			nextStop.setDoor(rs.getString("door"));
 			nextStop.setRouteId(rs.getInt("route_id"));
+			nextStop.setIsLastStop(lastSeqNum == nextStop.getSeqNum());
 		}
 		return nextStop;
+	}
+	
+	public int getLastStopSeqInRoute(int routeId) {
+		String getLastStopSeqSql =
+				"select max(seq_num) last_seq_num\n" +
+				"  from stops\n" +
+				" where route_id = ?";
+		
+		SqlRowSet rs = jdbcTemplate.queryForRowSet(getLastStopSeqSql, routeId);
+		rs.next();
+		return rs.getInt("last_seq_num");
 	}
 }

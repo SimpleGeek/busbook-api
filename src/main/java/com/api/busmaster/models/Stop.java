@@ -14,13 +14,14 @@ public class Stop {
 	private String building;
 	private String door;
 	private int routeId;
+	private boolean isLastStop;
 	private List<Rider> riders;
 	
 	// Public constructors
 	public Stop() {}
 	
 	public Stop(int stopId, int seqNum, String streetAddr, String city, String stateAbbr, String zip, String apartment,
-			String building, String door, int routeId) {
+			String building, String door, int routeId, boolean isLastStop) {
 		this.stopId = stopId;
 		this.seqNum = seqNum;
 		this.streetAddr = streetAddr;
@@ -31,6 +32,7 @@ public class Stop {
 		this.building = building;
 		this.door = door;
 		this.routeId = routeId;
+		this.isLastStop = isLastStop;
 	}
 
 	// Getters/Setters
@@ -112,6 +114,14 @@ public class Stop {
 
 	public void setRouteId(int routeId) {
 		this.routeId = routeId;
+	}
+	
+	public boolean isLastStop() {
+		return isLastStop;
+	}
+
+	public void setIsLastStop(boolean isLastStop) {
+		this.isLastStop = isLastStop;
 	}
 
 	public List<Rider> getRiders() {
