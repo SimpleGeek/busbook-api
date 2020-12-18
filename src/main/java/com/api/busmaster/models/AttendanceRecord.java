@@ -1,15 +1,17 @@
 package com.api.busmaster.models;
 
+import java.time.Instant;
+
 public class AttendanceRecord {
 	// Private attributes
 	private int attendanceRecId;
-	private String attendanceDt;
+	private Instant attendanceDt;
 	private int riderId;
 	
 	// Public constructors
 	public AttendanceRecord() {}
 	
-	public AttendanceRecord(int attendanceRecId, String attendanceDt, int riderId) {
+	public AttendanceRecord(int attendanceRecId, Instant attendanceDt, int riderId) {
 		this.attendanceRecId = attendanceRecId;
 		this.attendanceDt = attendanceDt;
 		this.riderId = riderId;
@@ -24,11 +26,11 @@ public class AttendanceRecord {
 		this.attendanceRecId = attendanceRecId;
 	}
 
-	public String getAttendanceDt() {
+	public Instant getAttendanceDt() {
 		return attendanceDt;
 	}
 
-	public void setAttendanceDt(String attendanceDt) {
+	public void setAttendanceDt(Instant attendanceDt) {
 		this.attendanceDt = attendanceDt;
 	}
 
