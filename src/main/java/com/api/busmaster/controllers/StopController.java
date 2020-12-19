@@ -2,6 +2,8 @@ package com.api.busmaster.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +16,12 @@ public class StopController {
 	private StopService stopService;
 	
 	@GetMapping("/api/nextstop")
-	public Stop getNextStop(@RequestParam("prevStopSeqNum")int prevStopSeqNum, @RequestParam("routeId")int routeId) {
+	public Stop getNextStop(@RequestParam("prevStopSeqNum") int prevStopSeqNum, @RequestParam("routeId") int routeId) {
 		return stopService.getNextStop(prevStopSeqNum, routeId);
+	}
+	
+	@PostMapping("/api/insertstop")
+	public void insertStop(@RequestBody Stop stop) {
+		stopService.insertStopIntoRoute(stop);
 	}
 }

@@ -50,6 +50,14 @@ public class AttendanceRecordDao {
 		});
 	}
 	
+	/**
+	 * Returns the full list of attendance records by
+	 * route id.  Probably will be removed later, since
+	 * this is really only used for testing.
+	 * 
+	 * @param routeId
+	 * @return
+	 */
 	public List<AttendanceRecord> getAttendanceRecordsByRoute(int routeId) {
 		List<AttendanceRecord> attendanceRecords = new ArrayList<AttendanceRecord>();
 		String getAttendanceRecordsByRouteSql =
