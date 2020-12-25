@@ -102,4 +102,13 @@ public class StopDao {
 		jdbcTemplate.update(insertStopSql, stop.getSeqNum(), stop.getStreetAddr(), stop.getCity(), stop.getStateAbbr(),
 							stop.getZip(), stop.getApartment(), stop.getBuilding(), stop.getDoor(), stop.getRouteId());
 	}
+	
+	public int getStopIdBySeqNumAndRouteId(int seqNum, int routeId) {
+		String getStopIdSql =
+				"select stop_id\n" +
+				"  from stops\n" +
+				" where seq_num = ?\n" +
+				"   and route_id = ?";
+		return jdbcTemplate.queryForObject(getStopIdSql, Integer.class, seqNum, routeId);
+	}
 }

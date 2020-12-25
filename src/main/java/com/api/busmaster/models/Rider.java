@@ -1,18 +1,20 @@
 package com.api.busmaster.models;
 
+import java.time.Instant;
+
 public class Rider {
 	// Private Attributes
 	private int riderId;
 	private String fname;
 	private String lname;
 	private int age; // Age in whole years old
-	private String birthday;
+	private Instant birthday;
 	private int stopId;
 	
 	// Public constructors
 	public Rider() {}
 	
-	public Rider(int riderId, String fname, String lname, int age, String birthday, int stopId) {
+	public Rider(int riderId, String fname, String lname, int age, Instant birthday, int stopId) {
 		this.riderId = riderId;
 		this.fname = fname;
 		this.lname = lname;
@@ -54,11 +56,11 @@ public class Rider {
 		this.age = age;
 	}
 	
-	public String getBirthday() {
+	public Instant getBirthday() {
 		return birthday;
 	}
 	
-	public void setBirthday(String birthday) {
+	public void setBirthday(Instant birthday) {
 		this.birthday = birthday;
 	}
 

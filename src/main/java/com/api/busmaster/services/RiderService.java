@@ -20,4 +20,8 @@ public class RiderService {
 	public List<Rider> getRidersForStop(int stopId) {
 		return riderDao.getRidersForStop(stopId);
 	}
+	
+	public void insertRiders(List<Rider> riders) {
+		riderDao.insertRiders(riders);
+	}
 }

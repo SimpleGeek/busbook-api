@@ -29,7 +29,14 @@ public class StopService {
 		// in the new stop's position.
 		stopDao.shiftStopSequencesUp(stop.getSeqNum(), stop.getRouteId());
 		
-		// Now, insert the new stop in the newly created hole.
+		// Next, insert the new stop in the newly created hole.
 		stopDao.insertStop(stop);
+		
+		// Now, add stop id of just-inserted stop to each rider
+		int stopId = stopDao.getStopIdBySeqNumAndRouteId(stop.getSeqNum(), stop.getRouteId());
+		stop.getRiders().forEach(r -> r.setStopId(stopId));
+		
+		// Finally, insert the riders for the stop
+		riderService.insertRiders(stop.getRiders());
 	}
 }

@@ -1,9 +1,13 @@
 package com.api.busmaster.daos;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
@@ -22,13 +26,14 @@ public class RiderDao {
 				"       fname,\n" +
 				"       lname,\n" +
 				"       age(birthday) as age_str,\n" +
-				"		to_char(birthday, 'Mon dd, yyyy') as birthday,\n" +
+				"		birthday,\n" +
 				"       stop_id\n" +
 				"from riders";
 		SqlRowSet rs = jdbcTemplate.queryForRowSet(getRiderSql);
 		while(rs.next()) {
 			riders.add(new Rider(rs.getInt("rider_id"), rs.getString("fname"), rs.getString("lname"), 
-								 getYearsFromAgeStr(rs.getString("age_str")), rs.getString("birthday"), rs.getInt("stop_id")));
+								 getYearsFromAgeStr(rs.getString("age_str")), rs.getTimestamp("birthday").toInstant(),
+								 rs.getInt("stop_id")));
 		}
 		return riders;
 	}
@@ -39,7 +44,7 @@ public class RiderDao {
 				"       fname,\n" +
 				"       lname,\n" +
 				"       age(birthday) as age_str,\n" +
-				"		to_char(birthday, 'Mon dd, yyyy') as birthday,\n" +
+				"		birthday,\n" +
 				"       stop_id\n" +
 				"  from riders\n" +
 				" where stop_id = ?";
@@ -48,9 +53,36 @@ public class RiderDao {
 		SqlRowSet rs = jdbcTemplate.queryForRowSet(getRidersForStopSql, stopId);
 		while (rs.next()) {
 			stopRiders.add(new Rider(rs.getInt("rider_id"), rs.getString("fname"), rs.getString("lname"), 
-									 getYearsFromAgeStr(rs.getString("age_str")), rs.getString("birthday"), rs.getInt("stop_id")));
+									 getYearsFromAgeStr(rs.getString("age_str")), rs.getTimestamp("birthday").toInstant(),
+									 rs.getInt("stop_id")));
 		}
 		return stopRiders;
+	}
+	
+	public void insertRiders(List<Rider> riders) {
+		String insertRidersSql =
+				"insert into riders(fname, lname, birthday, stop_id)\n" +
+				"values(?, ?, ?, ?)";
+		jdbcTemplate.batchUpdate(insertRidersSql, new BatchPreparedStatementSetter() {
+			@Override
+			public void setValues(PreparedStatement ps, int i) {
+				Rider r = riders.get(i);
+				
+				try {
+					ps.setString(1, r.getFname());
+					ps.setString(2, r.getLname());
+					ps.setTimestamp(3, Timestamp.from(r.getBirthday()));
+					ps.setInt(4, r.getStopId());
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public int getBatchSize() {
+				return riders.size();
+			}
+		});
 	}
 	
 	// Private utility methods
